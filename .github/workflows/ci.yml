@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Syntax check check_api.sh
+        run: bash -n check_api.sh
+
+      - name: Syntax check analyze_logs.sh
+        run: bash -n analyze_logs.sh
+
+      - name: Test check_api.sh with 200
+        run: ./check_api.sh https://httpbin.org/status/200
+
+      - name: Run analyze_logs.sh
+        run: |
+          ./analyze_logs.sh | tee out.txt
+          grep -q 'Общее число запросов: 350' out.txt
