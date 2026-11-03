@@ -13,9 +13,9 @@ CODES=(200 200 200 201 400 401 403 404 500 502 503)
 for ((i=0; i<350; i++)); do
   IP=${IPS[$RANDOM % ${#IPS[@]}]}
   METHOD=${METHODS[$RANDOM % ${#METHODS[@]}]}
-  PATH=${PATHS[$RANDOM % ${#PATHS[@]}]}
+  URI=${PATHS[$RANDOM % ${#PATHS[@]}]}
   CODE=${CODES[$RANDOM % ${#CODES[@]}]}
-  echo "$IP - - [15/Aug/2026:10:15:32] \"$METHOD $PATH HTTP/1.1\" $CODE" >> access.log
+  echo "$IP - - [15/Aug/2026:10:15:32] \"$METHOD $URI HTTP/1.1\" $CODE" >> access.log
 done
 
 echo "Общее число запросов: $(wc -l < access.log)"
