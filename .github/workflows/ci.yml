@@ -1,4 +1,4 @@
-﻿name: CI
+name: CI
 
 on:
   pull_request:
@@ -22,4 +22,4 @@ jobs:
         run: ./check_api.sh https://httpbin.org/status/200
 
       - name: Run analyze_logs.sh
-        run: ./analyze_logs.sh
+        run: ./analyze_logs.sh | tee out.txt && grep -q 'Общее число запросов: 350' out.txt
